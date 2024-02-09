@@ -1,0 +1,120 @@
+version: '3.4'
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  eureka-server:
+    image: steeltoeoss/eureka-server:latest
+    container_name: eureka-server
+    ports:
+      - "8761:8761" 
+    networks:
+      - backend
+
+  rabbitmq-server:
+    image: "rabbitmq:3.8-management"
+    container_name: rabbitmq-server
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - backend
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+ 
+  apigatewayocelot:
+    image: ${DOCKER_REGISTRY-}apigatewayocelot
+    build:
+      context: .
+      dockerfile: ApiGatewayOcelot/Dockerfile
+    container_name: api-gateway-container
+    ports:
+      - "6901:6901"
+    environment:
+      - ASPNETCORE_URLS=http://+:6901
+    depends_on:
+      - eureka-server
+    networks:
+      - backend
+
+  authservice:
+    image: ${DOCKER_REGISTRY-}authservice
+    build:
+      context: .
+      dockerfile: AuthService/Dockerfile
+    container_name: auth-container
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+    depends_on:
+      - eureka-server
+    networks:
+      - backend
+
+  cartservice:
+    image: ${DOCKER_REGISTRY-}cartservice
+    build:
+      context: .
+      dockerfile: CartService/Dockerfile
+    container_name: cart-container
+    ports:
+      - "5003:5003"
+    environment:
+      - ASPNETCORE_URLS=http://+:5003
+    depends_on:
+      - eureka-server
+      - rabbitmq-server
+    networks:
+      - backend
+
+  orderservice:
+    image: ${DOCKER_REGISTRY-}orderservice
+    build:
+      context: .
+      dockerfile: OrderService/Dockerfile
+    container_name: order-container
+    ports:
+      - "5004:5004"
+    environment:
+      - ASPNETCORE_URLS=http://+:5004
+    depends_on:
+      - eureka-server
+      - rabbitmq-server
+    networks:
+      - backend
+
+  productservice:
+    image: ${DOCKER_REGISTRY-}productservice
+    build:
+      context: .
+      dockerfile: ProductService/Dockerfile
+    container_name: product-container
+    ports:
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_URLS=http://+:5001
+    depends_on:
+      - eureka-server
+      - rabbitmq-server
+    networks:
+      - backend
+
+  productdetailservice:
+    image: ${DOCKER_REGISTRY-}productdetailservice
+    build:
+      context: .
+      dockerfile: ProductDetailService/Dockerfile
+    container_name: productDetail-container
+    ports:
+      - "5002:5002"
+    environment:
+      - ASPNETCORE_URLS=http://+:5002
+    depends_on:
+      - eureka-server
+      - rabbitmq-server
+    networks:
+      - backend

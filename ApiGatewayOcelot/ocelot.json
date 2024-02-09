@@ -1,0 +1,218 @@
+{
+  "Routes": [
+    //Auth Web Api
+    {
+      "DownstreamPathTemplate": "/api/Account",
+      "DownstreamScheme": "http",
+      "ServiceName": "auth",
+      "UpstreamPathTemplate": "/apiGateway/account",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "UseServiceDiscovery": true
+    },
+    //ProductService ----routes
+    //GetAllProducts
+    {
+      "DownstreamPathTemplate": "/api/Product/allProducts",
+      "DownstreamScheme": "http",
+      "ServiceName": "Product-service",
+      "UpstreamPathTemplate": "/apiGateway/Product/allProducts",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    //Add product --- admin
+    {
+      "DownstreamPathTemplate": "/api/Product/addProduct",
+      "DownstreamScheme": "http",
+      "ServiceName": "Product-service",
+      "UpstreamPathTemplate": "/apiGateway/Product/addProduct",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //get product by Id
+    {
+      "DownstreamPathTemplate": "/api/Product/getProductById/{id}",
+      "DownstreamScheme": "http",
+      "ServiceName": "Product-service",
+      "UpstreamPathTemplate": "/apiGateway/Product/getProductById/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    //get product Detail by Id
+    {
+      "DownstreamPathTemplate": "/api/Product/getProductDetailsById/{id}",
+      "DownstreamScheme": "http",
+      "ServiceName": "Product-service",
+      "UpstreamPathTemplate": "/apiGateway/Product/getProductDetailsById/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    //Remove Product  --- admin
+    {
+      "DownstreamPathTemplate": "/api/Product/removeProduct/{id}",
+      "DownstreamScheme": "http",
+      "ServiceName": "Product-service",
+      "UpstreamPathTemplate": "/apiGateway/Product/removeProduct/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //ProductDetailService ----routes
+    //get All productDetails
+    {
+      "DownstreamPathTemplate": "/api/ProductDetail/getAllProductDetails",
+      "DownstreamScheme": "http",
+      "ServiceName": "ProductDetail-service",
+      "UpstreamPathTemplate": "/apiGateway/ProductDetail/allProductDetails",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    //get productDetails by Id
+    {
+      "DownstreamPathTemplate": "/api/ProductDetail/getProductDetailsById/{id}",
+      "DownstreamScheme": "http",
+      "ServiceName": "ProductDetail-service",
+      "UpstreamPathTemplate": "/apiGateway/ProductDetail/getProductDetailsById/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
+    },
+    //add product details --- admin
+    {
+      "DownstreamPathTemplate": "/api/ProductDetail/addProductDetails",
+      "DownstreamScheme": "http",
+      "ServiceName": "ProductDetail-service",
+      "UpstreamPathTemplate": "/apiGateway/ProductDetail/addProductDetails",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //Remove Product Details --admin
+    {
+      "DownstreamPathTemplate": "/api/ProductDetail/removeProductDetail/{id}",
+      "DownstreamScheme": "http",
+      "ServiceName": "ProductDetail-service",
+      "UpstreamPathTemplate": "/apiGateway/ProductDetail/removeProductDetail/{id}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //Cart Routes---------------- user/admin
+    //get my cart
+    {
+      "DownstreamPathTemplate": "/api/Cart/myCart",
+      "DownstreamScheme": "http",
+      "ServiceName": "Cart-service",
+      "UpstreamPathTemplate": "/apiGateway/Cart/myCart",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //add to cart
+    {
+      "DownstreamPathTemplate": "/api/Cart/addToMyCart/{productId}/{quantity}",
+      "DownstreamScheme": "http",
+      "ServiceName": "Cart-service",
+      "UpstreamPathTemplate": "/apiGateway/Cart/addToMyCart/{productId}/{quantity}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //remove from cart
+    {
+      "DownstreamPathTemplate": "/api/Cart/removeFromMyCart/{productId}",
+      "DownstreamScheme": "http",
+      "ServiceName": "Cart-service",
+      "UpstreamPathTemplate": "/apiGateway/Cart/removeFromMyCart/{productId}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //Order --- routes
+    //get my orders -- user/admin
+    {
+      "DownstreamPathTemplate": "/api/Order/myOrders",
+      "DownstreamScheme": "http",
+      "ServiceName": "Order-service",
+      "UpstreamPathTemplate": "/apiGateway/Order/myOrders",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //Create order -- user/admin
+    {
+      "DownstreamPathTemplate": "/api/Order/createMyOrder/{productId}",
+      "DownstreamScheme": "http",
+      "ServiceName": "Order-service",
+      "UpstreamPathTemplate": "/apiGateway/Order/createMyOrder/{productId}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Type": "Eureka",
+      "Host": "eureka-server", //change to container name
+      "Port": 8761
+    },
+    "UseServiceDiscovery": true
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "apigatewayocelot": "StartDebugging",
+        "authservice": "StartDebugging",
+        "cartservice": "StartDebugging",
+        "orderservice": "StartDebugging",
+        "productservice": "StartDebugging",
+        "productdetailservice": "StartDebugging"
+      }
+    }
+  }
+}

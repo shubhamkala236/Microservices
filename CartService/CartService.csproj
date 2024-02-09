@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <UserSecretsId>ac88e843-554e-4938-988b-2c21cf8475bf</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+	  <PackageReference Include="MassTransit" Version="7.3.1" />
+	  <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+	  <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
+	  <PackageReference Include="MassTransit.RabbitMQ" Version="7.3.1" />
+	  <PackageReference Include="Steeltoe.Common.Hosting" Version="3.2.6" />
+	  <PackageReference Include="Steeltoe.Discovery.Eureka" Version="3.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CartBLL\CartBLL.csproj" />
+    <ProjectReference Include="..\CartDAL\CartDAL.csproj" />
+    <ProjectReference Include="..\JwtAuthenticationManager\JwtAuthenticationManager.csproj" />
+  </ItemGroup>
+
+</Project>

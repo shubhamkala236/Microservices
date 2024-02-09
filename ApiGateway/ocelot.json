@@ -1,0 +1,29 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Account",
+      "DownstreamScheme": "http",
+      "ServiceName": "auth-service",
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 7132
+      //  }
+      //],
+      "UpstreamPathTemplate": "/gateway/account",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "UseServiceDiscovery": true,
+      "ServiceDiscoveryProvider": {
+        "Type": "Eureka"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Type": "Eureka"
+    }
+  }
+}

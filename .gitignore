@@ -1,0 +1,24 @@
+# .NET Core
+bin/
+obj/
+*/.exe
+*/.dll
+*/.pdb
+*/.user
+
+# Visual Studio Code
+.vscode/
+*.csproj.user
+.vs/
+
+# NuGet Packages
+*.nuget.props
+*.nuget.targets
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+
+# Test Results
+[Tt]est[Rr]esult*/
+*.testsettings
